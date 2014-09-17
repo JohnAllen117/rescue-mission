@@ -1,0 +1,6 @@
+<%= @question.title %>
+<%= @question.body %>
+<%= User.where(id: @question.user_id).first.name %>
+
+
+<a href="/questions">Go Back</a>

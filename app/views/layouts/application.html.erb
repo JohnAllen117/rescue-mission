@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RescueMission</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<nav>
+  <a href ="/">Questions</a>
+  <a href ="/questions/new">Create new Question</a>
+  <a href ="/">Sign in</a>
+</nav>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
