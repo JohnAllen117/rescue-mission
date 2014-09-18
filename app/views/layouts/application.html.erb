@@ -10,6 +10,16 @@
   <a href ="/">Questions</a>
   <a href ="/questions/new">Create new Question</a>
   <a href ="/">Sign in</a>
+
+<% if current_user %>
+  <p>Signed in as <%= current_user.name %></p>
+<% else %>
+  <%= link_to "Sign in with Twitter", "/auth/twitter" %>
+<% end %>
+
+<%= ENV["TWITTER_API_KEY"] %><br/>
+<%= ENV["TWITTER_API_SECRET"] %>
+
 </nav>
 <body>
 

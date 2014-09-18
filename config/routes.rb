@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :questions
   resources :answers
 
+  root 'questions#index'
+
+  get 'auth/:provider/callback', to: 'sessions#create'
 
 
 

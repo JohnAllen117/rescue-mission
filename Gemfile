@@ -39,4 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'omniauth-twitter'
 gem 'pry'
-
+gem 'dotenv-rails'
