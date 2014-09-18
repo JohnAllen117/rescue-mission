@@ -1,11 +1,12 @@
 <%= form_for @question do |f| %>
-<p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-</p>
-<p>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
-</p>
-<%= f.submit "submit" %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>(Must be 40 chars)
+  </p>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>(Must be 150 chars)
+  </p>
+
+  <%= f.submit "submit" %>
 <% end %>

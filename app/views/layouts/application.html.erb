@@ -6,23 +6,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<nav>
+
+<body>
+<div class="nav">
   <a href ="/">Questions</a>
   <a href ="/questions/new">Create new Question</a>
-  <a href ="/">Sign in</a>
-
-<% if current_user %>
-  <p>Signed in as <%= current_user.name %></p>
-<% else %>
-  <%= link_to "Sign in with Twitter", "/auth/twitter" %>
-<% end %>
-
-<%= ENV["TWITTER_API_KEY"] %><br/>
-<%= ENV["TWITTER_API_SECRET"] %>
-
-</nav>
-<body>
-
+  <a href ="/"></a>
+  <% if current_user %>
+    <span>Signed in as <%= current_user.name %></span>
+  <% else %>
+    <%= link_to "Sign in with Twitter", "/auth/twitter" %>
+  <% end %>
+</div>
+<%= flash[:notice]%>
 <%= yield %>
 
 </body>

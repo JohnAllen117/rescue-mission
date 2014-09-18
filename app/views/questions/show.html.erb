@@ -2,5 +2,9 @@
 <%= @question.body %>
 <%= User.where(id: @question.user_id).first.name %>
 
+<%= link_to 'answer', new_question_answer_path(@question)%>
+
+
+<a href="/answers/new">asddf</a>
 
 <a href="/questions">Go Back</a>

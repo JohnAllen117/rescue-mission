@@ -1,12 +1,7 @@
-<%= form_for @answer do |f| %>
-<p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-</p>
-<p>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
-  <%= f.text_field :user_id %>
-</p>
-<%= f.submit "submit" %>
+<h1>MAKE A NEW ANSWER</h1>
+  <%= form_for [@question, @answer] do |f| %>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  <%= f.submit "submit" %>
 <% end %>
+

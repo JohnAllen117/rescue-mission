@@ -1,9 +1,8 @@
 class CreateTables < ActiveRecord::Migration
   def change
     create_table :users do |t|
+      t.string :nickname, null: false
       t.string :name, null: false
-      t.string :email
-      t.string :password, default: "Josh"
       t.integer :karma, default: 0
     end
 

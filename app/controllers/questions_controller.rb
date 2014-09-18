@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+
   end
 
   # POST /questions
@@ -18,9 +19,9 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to @question, notice: 'Question was successfully created.'
+      redirect_to '/', notice: 'Question was successfully created.'
     else
-      render action: 'new'
+      render action: 'new', notice: 'Question no good'
     end
   end
 
@@ -33,6 +34,8 @@ class QuestionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
-    params.require(:question).permit(:title, :body)
+    permitted = params.require(:question).permit(:title, :body, :user_id)
+    permitted["user_id"] = current_user.id
+    permitted
   end
 end

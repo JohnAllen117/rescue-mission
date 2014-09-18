@@ -15,8 +15,7 @@ class UsersController < ApplicationController
 
   # POST /questions
   def create
-    @user = User.new(user_params)
-
+    @user = User.new(auth_params)
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
     else
@@ -29,11 +28,5 @@ class UsersController < ApplicationController
     @users = User.search(params[:query])
   end
 
-  private
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def user_params
-    params.require(:user).permit(:name, :email)
-  end
 
 end
