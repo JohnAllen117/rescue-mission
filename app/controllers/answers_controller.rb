@@ -13,11 +13,11 @@ class AnswersController < ApplicationController
   end
 
   def create
+    @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
-    @answer.question_id = params[:question_id]
-    binding.pry
+    @answer.question = @question
     if @answer.save
-      redirect_to root_path, notice: 'Answer was successfully created.'
+      redirect_to question_path(@question), notice: 'Answer was successfully created.'
     else
       render action: :new, notice: 'Answer no good'
     end

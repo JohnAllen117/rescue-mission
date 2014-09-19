@@ -1,11 +1,12 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
+    @questions = Question.all.order(:created_at)
   end
 
   # GET /questions/1
   def show
     @question = Question.find(params[:id])
+    @answers = @question.answers.all
   end
 
   # GET /questions/new
@@ -21,13 +22,28 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to '/', notice: 'Question was successfully created.'
     else
-      render action: 'new', notice: 'Question no good'
+      render action: 'new', notice: 'Question is not valid.'
     end
   end
 
-  # GET /questions/search
-  def search
-    @questions = Question.search(params[:query])
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+
+    if @question.update(question_params)
+      redirect_to @question
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path
   end
 
   private

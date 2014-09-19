@@ -1,10 +1,15 @@
-<%= @question.title %>
-<%= @question.body %>
-<%= User.where(id: @question.user_id).first.name %>
+<strong><%= @question.title %></strong> - <%= User.where(id: @question.user_id).first.nickname %> <%= link_to "Edit", edit_question_path %>
+<% if current_user.id == @question.user_id %>
+   <%= link_to "DERETE", question_path, method: :delete %>
+<% end %>
+<p><%= @question.body %></p>
+<ul>
+  <% @answers.all.each do |answer| %>
+    <li><%= answer.body %></li>
+  <% end %>
+</ul>
 
-<%= link_to 'answer', new_question_answer_path(@question)%>
+<%= link_to 'submit answer', new_question_answer_path(@question)%>
 
 
-<a href="/answers/new">asddf</a>
-
-<a href="/questions">Go Back</a>
+<%= link_to 'Back', :back %>
