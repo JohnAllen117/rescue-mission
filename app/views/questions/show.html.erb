@@ -1,11 +1,14 @@
-<strong><%= @question.title %></strong> - <%= User.where(id: @question.user_id).first.nickname %> <%= link_to "Edit", edit_question_path %>
-<% if current_user.id == @question.user_id %>
-   <%= link_to "DERETE", question_path, method: :delete %>
+<strong><%= @question.title %></strong> - <%= User.where(id: @question.user_id).first.nickname %>
+
+<% if @question.user == current_user %>
+  <%= link_to "Edit", edit_question_path %>
+   <button><%= link_to "delete", question_path, method: :delete %></button>
 <% end %>
 <p><%= @question.body %></p>
+
 <ul>
   <% @answers.all.each do |answer| %>
-    <li><%= answer.body %></li>
+    <li><%= answer.body%> - <%= answer.user.nickname %></li>
   <% end %>
 </ul>
 

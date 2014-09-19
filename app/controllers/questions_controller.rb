@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @questions = Question.all.order(:created_at)
   end
@@ -22,16 +24,20 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to '/', notice: 'Question was successfully created.'
     else
-      render action: 'new', notice: 'Question is not valid.'
+      flash.now[:notice] = 'Question is not valid.'
+      render action: 'new'
     end
   end
 
   def edit
     @question = Question.find(params[:id])
+    authorize_user_for_question!(@question)
   end
 
   def update
     @question = Question.find(params[:id])
+
+    authorize_user_for_question!(@question)
 
     if @question.update(question_params)
       redirect_to @question
@@ -42,6 +48,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
+    authorize_user_for_question!(@question)
     @question.destroy
     redirect_to questions_path
   end
@@ -53,5 +60,11 @@ class QuestionsController < ApplicationController
     permitted = params.require(:question).permit(:title, :body, :user_id)
     permitted["user_id"] = current_user.id
     permitted
+  end
+
+  def authorize_user_for_question!(question)
+    unless question.user == current_user
+      redirect_to question_path, notice: 'dont mess this up'
+    end
   end
 end
